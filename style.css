@@ -6,7 +6,7 @@ html {
 
 body {
   margin: 0;
-  background: #fbffed;
+  background-color: whitesmoke;
 }
 
 .container {
@@ -18,10 +18,39 @@ body {
   flex-direction: column;
 }
 
+button {
+  z-index: 1;
+  margin-left: 70px;
+  cursor: pointer;
+  outline: none;
+  width: 200px;
+  height: 50px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.3rem;
+  color: white;
+  background: #353825;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 20px 10px rgba(2, 2, 1, 0.3);
+}
+
+button:hover {
+  filter: brightness(110%)
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  cursor: default;
+  filter: brightness(50%);
+}
+
 .robot svg {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 35%;
   display: block;
   margin: 0 auto;
   margin-left: -300px;
