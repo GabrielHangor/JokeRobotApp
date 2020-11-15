@@ -3,18 +3,40 @@ const audioElement = document.querySelector("#audio");
 
 const apiKey = "54c9874c1efc47d78c4a6da6f2389db7";
 
-function test() {
-  VoiceRSS.speech({
-    key: `54c9874c1efc47d78c4a6da6f2389db7`,
-    src: "Hello, world!",
-    hl: "en-us",
-    v: "Linda",
-    r: 0,
-    c: "mp3",
-    f: "44khz_16bit_stereo",
-    ssml: false,
-  });
+// function test() {
+//   VoiceRSS.speech({
+//     key: `54c9874c1efc47d78c4a6da6f2389db7`,
+//     src: "Hello, world!",
+//     hl: "en-us",
+//     v: "Linda",
+//     r: 0,
+//     c: "mp3",
+//     f: "44khz_16bit_stereo",
+//     ssml: false,
+//   });
+// }
+
+// test();
+
+// Get Jokes from Joke API
+async function getJokes() {
+  let joke = "";
+  const apiUrl = "https://sv443.net/jokeapi/v2/joke/Any";
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    
+    data.setup
+      ? (joke = `${data.setup} ... ${data.delivery}`)
+      : (joke = data.joke);
+
+    console.log(joke);
+  } catch (error) {
+    console.log(error);
+  }
 }
+
+getJokes();
 
 // VoiceRSS Javascript SDK minified from the API
 const VoiceRSS = {
@@ -54,7 +76,7 @@ const VoiceRSS = {
       if (4 == t.readyState && 200 == t.status) {
         if (0 == t.responseText.indexOf("ERROR")) throw t.responseText;
         new Audio(t.responseText).play();
-        audioElement.src = t.responseText; 
+        audioElement.src = t.responseText;
         audioElement.play();
       }
     }),
@@ -121,5 +143,3 @@ const VoiceRSS = {
     throw "The browser does not support HTTP request";
   },
 };
-
-test();
