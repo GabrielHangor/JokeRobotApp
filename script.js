@@ -3,20 +3,19 @@ const audioElement = document.querySelector("#audio");
 
 const apiKey = "54c9874c1efc47d78c4a6da6f2389db7";
 
-// function test() {
-//   VoiceRSS.speech({
-//     key: `54c9874c1efc47d78c4a6da6f2389db7`,
-//     src: "Hello, world!",
-//     hl: "en-us",
-//     v: "Linda",
-//     r: 0,
-//     c: "mp3",
-//     f: "44khz_16bit_stereo",
-//     ssml: false,
-//   });
-// }
-
-// test();
+// Passing Joke to VoiceRSS API
+function textToSpeech(joke) {
+  VoiceRSS.speech({
+    key: `54c9874c1efc47d78c4a6da6f2389db7`,
+    src: joke,
+    hl: "en-us",
+    v: "Amy",
+    r: 0,
+    c: "mp3",
+    f: "44khz_16bit_stereo",
+    ssml: false,
+  });
+}
 
 // Get Jokes from Joke API
 async function getJokes() {
@@ -25,20 +24,26 @@ async function getJokes() {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    
+
     data.setup
       ? (joke = `${data.setup} ... ${data.delivery}`)
       : (joke = data.joke);
 
-    console.log(joke);
+    textToSpeech(joke);
+    toggleButton();
   } catch (error) {
     console.log(error);
   }
 }
 
-getJokes();
+function toggleButton() {
+  button.disabled = !button.disabled;
+}
 
-// VoiceRSS Javascript SDK minified from the API
+button.addEventListener('click', getJokes);
+audioElement.addEventListener('ended', toggleButton);
+
+// VoiceRSS Javascript SDK from the API
 const VoiceRSS = {
   speech: function (e) {
     this._validate(e), this._request(e);
