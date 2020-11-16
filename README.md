@@ -10,5 +10,5 @@ This is a simple training app based on HTML, CSS, JS and 2 APIs - [Joke API](htt
 
 ## Usage
 Just browse to
-<https://gabrielhangor.github.io/JokeTeller/>
+<https://gabrielhangor.github.io/JokeRobotApp/>
 
